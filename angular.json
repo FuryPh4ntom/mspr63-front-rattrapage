@@ -33,7 +33,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/mspr63-front/",
+              "baseHref": "/mspr-front/",
               "budgets": [
                 {
                   "type": "initial",
