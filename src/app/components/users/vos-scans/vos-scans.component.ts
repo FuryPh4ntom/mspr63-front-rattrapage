@@ -26,7 +26,7 @@ export class VosScansComponent implements OnInit {
   }
 
   loadEspeces(): void {
-    this.http.get<any[]>('http://localhost:3000/api/especes/all')
+    this.http.get<any[]>('http://192.168.79.234:3000/api/especes/all')
       .subscribe({
         next: data => {
           this.especes = data.map(e => e.espece);
@@ -41,7 +41,7 @@ export class VosScansComponent implements OnInit {
     const email = localStorage.getItem('email');
     if (!email) return;
 
-    let url = `http://localhost:3000/api/scans/myscans?email=${email}&page=${this.page}`;
+    let url = `http://192.168.79.234:3000/api/scans/myscans?email=${email}&page=${this.page}`;
     if (this.selectedEspece) {
       url += `&espece=${encodeURIComponent(this.selectedEspece)}`;
     }
@@ -66,7 +66,7 @@ export class VosScansComponent implements OnInit {
     const email = localStorage.getItem('email');
     if (!email) return;
 
-    let url = `http://localhost:3000/api/scans/all?email=${encodeURIComponent(email)}`;
+    let url = `http://192.168.79.234:3000/api/scans/all?email=${encodeURIComponent(email)}`;
 
     if (this.selectedEspece && this.selectedEspece !== 'Toutes') {
       url += `&espece=${encodeURIComponent(this.selectedEspece)}`;

@@ -122,3 +122,49 @@ video,
     align-items: center;
   }
 }
+
+
+@media screen and (max-width: 767px) {
+  .camera-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .preview-box {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .capture-btn,
+  .remove-btn {
+    padding: 12px;
+    font-size: 18px;
+  }
+
+  .results {
+    padding: 1rem;
+  }
+
+  .result-card {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .result-imgs {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .user-photo,
+  .species-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .result-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .result-info p {
+    font-size: 0.9rem;
+  }
+}

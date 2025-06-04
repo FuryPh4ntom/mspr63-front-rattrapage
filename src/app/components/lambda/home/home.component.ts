@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadEspeces(): void {
-    this.http.get<any>('http://localhost:3000/api/especes/all')
+    this.http.get<any>('http://192.168.79.234:3000/api/especes/all')
       .subscribe({
         next: (data) => this.especes = data,
         error: (err) => console.error('Erreur chargement espèces :', err)

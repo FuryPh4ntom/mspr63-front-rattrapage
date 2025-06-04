@@ -147,3 +147,64 @@ button:disabled {
     font-size: 0.9rem;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .espece-card {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .espece-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .espece-info h2 {
+    font-size: 1.1rem;
+  }
+
+  .espece-info p {
+    font-size: 0.9rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  button {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    margin-right: 0;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  .pagination button {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .pagination span {
+    font-size: 0.95rem;
+  }
+
+  .edit-form input {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+}

@@ -64,3 +64,44 @@ button:hover {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
+
+/* -------- RESPONSIVE (mobile) -------- */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 1rem;
+  }
+
+  .intro {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .carousel {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+
+  .slide img {
+    max-height: 200px;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .wildlens-info {
+    padding: 1.5rem 1rem;
+    margin: 1rem;
+  }
+
+  .wildlens-info h3 {
+    font-size: 1.3rem;
+  }
+
+  .wildlens-info p {
+    font-size: 1rem;
+  }
+}

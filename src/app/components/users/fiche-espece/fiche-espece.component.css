@@ -120,3 +120,58 @@
     height: 200px;
   }
 }
+
+@media screen and (max-width: 599px) {
+  .fiche-container {
+    padding: 1.2rem 1rem;
+    margin: 2rem 1rem;
+    border-radius: 12px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .species-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .latin-name {
+    font-size: 1rem;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .info-item h4 {
+    font-size: 0.95rem;
+  }
+
+  .info-item p {
+    font-size: 0.9rem;
+  }
+
+  .description-section,
+  .funfact-section {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .back-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.7rem;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+  }
+}

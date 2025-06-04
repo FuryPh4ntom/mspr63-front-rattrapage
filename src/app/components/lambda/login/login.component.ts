@@ -34,7 +34,7 @@ export class LoginComponent {
       password: this.password
     };
   
-    this.http.post<{ message: string, nom: string, prenom: string, email: string }>('http://localhost:3000/api/auth/login', user).subscribe({
+    this.http.post<{ message: string, nom: string, prenom: string, email: string }>('http://192.168.79.234:3000/api/auth/login', user).subscribe({
       next: (response) => {
         localStorage.setItem('token', 'true');
         localStorage.setItem('nom', response.nom);
