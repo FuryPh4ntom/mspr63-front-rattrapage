@@ -1,0 +1,125 @@
+:root {
+  --primary-color: #2c3e50;
+  --accent-color: #3498db;
+  --input-bg: #f5f7fa;
+  --border-color: black;
+  --text-color: #333;
+  --radius: 8px;
+  --transition: 0.3s ease;
+  --font: 'Segoe UI', Roboto, sans-serif;
+}
+
+body{
+  overflow: hidden;
+}
+
+.form-container {
+  background-color: #30c48d;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
+  color: var(--primary-color);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input{
+  padding: 0.25rem;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid black;
+  border-radius: 1rem;
+  background-color: var(--input-bg);
+  font-size: 1rem;
+  transition: border-color var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+button {
+  padding: 0.75rem;
+  width: 30%;
+  margin: auto;
+  background-color: rgb(62, 62, 62);
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+button:hover {
+  background-color: rgb(39, 39, 39);
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.actions button {
+  background-color: #ffffff;
+  color: #30c48d;
+  border: 2px solid #30c48d;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.actions button:hover {
+  background-color: #30c48d;
+  color: white;
+}
+
+.edit-form input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.4rem 0;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+}
+
+
+/* Responsive desktop (min-width: 768px) */
+@media (min-width: 768px) {
+  .form-container {
+    max-width: 600px;
+    padding: 2rem;
+    border: 1px solid black;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px black;
+    margin-top: 2rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}

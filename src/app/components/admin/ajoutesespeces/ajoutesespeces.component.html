@@ -1,0 +1,25 @@
+<div class="form-container" style="background-color: #30c48d;">
+  <h2>Ajouter une espèce animale</h2>
+
+  <form (ngSubmit)="ajouterEspece()">
+    <input [(ngModel)]="especeData.espece" name="espece" placeholder="Espèce" required />
+    <input [(ngModel)]="especeData.nomLatin" name="nomLatin" placeholder="Nom latin" required />
+    <textarea [(ngModel)]="especeData.description" name="description" placeholder="Description" required></textarea>
+
+    <select [(ngModel)]="especeData.famille" name="famille" required>
+      <option value="" disabled selected>Sélectionnez une famille</option>
+      <option *ngFor="let f of familles" [value]="f">{{ f }}</option>
+    </select>
+
+    <input [(ngModel)]="especeData.taille" name="taille" placeholder="Taille" required />
+    <input [(ngModel)]="especeData.region" name="region" placeholder="Région" required />
+    <input [(ngModel)]="especeData.habitat" name="habitat" placeholder="Habitat" required />
+    <input [(ngModel)]="especeData.funFact" name="funFact" placeholder="Fun fact" required />
+
+    <label>Image de l'espèce</label>
+    <input type="file" accept="image/*" (change)="onImageSelected($event)" />
+
+    <button type="submit">Ajouter</button>
+    <p style="margin: auto; color: red;">{{ message }}</p>
+  </form>
+</div>
