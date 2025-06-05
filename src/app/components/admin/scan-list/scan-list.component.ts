@@ -23,7 +23,7 @@ export class ScanListComponent implements OnInit {
   }
 
   loadScans(page: number): void {
-    this.http.get<any>(`http://192.168.79.234:3000/api/scans/all?page=${page}`).subscribe({
+    this.http.get<any>(`http://localhost:3000/api/scans/all?page=${page}`).subscribe({
       next: (response) => {
         this.scans = response.scans;
         this.totalScans = response.total;

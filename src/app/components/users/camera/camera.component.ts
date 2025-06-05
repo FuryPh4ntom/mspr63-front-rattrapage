@@ -91,7 +91,7 @@ export class CameraComponent implements OnInit, AfterViewInit {
   }
 
   showRandomSpecies(photo: string): void {
-  this.http.post<any>('http://192.168.79.234:3000/api/especes/classify', { photo })
+  this.http.post<any>('http://localhost:3000/api/especes/classify', { photo })
     .subscribe(response => {
       if (response.match) {
         const speciesData = response.data;
@@ -110,7 +110,7 @@ export class CameraComponent implements OnInit, AfterViewInit {
 
         this.analyses.unshift(analysis);
 
-        this.http.post('http://192.168.79.234:3000/api/scans/userscan', {
+        this.http.post('http://localhost:3000/api/scans/userscan', {
           photo,
           especeDetectee: speciesData.espece,
           email: this.email

@@ -29,7 +29,7 @@ export class RegisterComponent {
       password: this.password
     };
 
-    this.http.post('http://192.168.79.234:3000/api/auth/register', user).subscribe({
+    this.http.post('http://localhost:3000/api/auth/register', user).subscribe({
       next: () => this.message = 'Inscription réussie !',
       error: err => this.message = err.error.message || 'Erreur lors de l\'inscription.'
     });

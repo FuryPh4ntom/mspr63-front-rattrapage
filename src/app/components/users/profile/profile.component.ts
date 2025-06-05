@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
       newPassword: this.newPassword
     };
 
-    this.http.put('http://192.168.79.234:3000/api/auth/profile', updatedUser)
+    this.http.put('http://localhost:3000/api/auth/profile', updatedUser)
       .subscribe({
         next: () => {
           this.message = 'Profil mis à jour avec succès';
@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
     const confirmation = confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');
     if (!confirmation) return;
 
-    this.http.delete(`http://192.168.79.234:3000/api/auth/profile?email=${this.user.email}`)
+    this.http.delete(`http://localhost:3000/api/auth/profile?email=${this.user.email}`)
       .subscribe({
         next: () => {
           localStorage.clear();

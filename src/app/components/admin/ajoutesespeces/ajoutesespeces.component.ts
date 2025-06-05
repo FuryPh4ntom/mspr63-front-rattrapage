@@ -40,7 +40,7 @@ export class AjoutesespecesComponent {
   }
 
   ajouterEspece(): void {
-    this.http.post('http://192.168.79.234:3000/api/especes', this.especeData)
+    this.http.post('http://localhost:3000/api/especes', this.especeData)
       .subscribe({
         next: response => {
           this.message = 'Espèce ajoutée avec succès !';

@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
   loadUsers(page: number) {
     this.loading = true;
     this.error = '';
-    this.http.get<any>(`http://192.168.79.234:3000/api/auth/users?page=${page}`).subscribe({
+    this.http.get<any>(`http://localhost:3000/api/auth/users?page=${page}`).subscribe({
       next: (res) => {
         this.users = res.users;
         this.page = res.page;

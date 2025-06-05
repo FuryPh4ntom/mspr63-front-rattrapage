@@ -27,7 +27,7 @@ export class FicheEspeceComponent implements OnInit {
   }
 
   loadDetails(): void {
-    this.http.get(`http://192.168.79.234:3000/api/especes/nom/${encodeURIComponent(this.especeName)}`)
+    this.http.get(`http://localhost:3000/api/especes/nom/${encodeURIComponent(this.especeName)}`)
       .subscribe({
         next: (data) => this.espece = data,
         error: (err) => {

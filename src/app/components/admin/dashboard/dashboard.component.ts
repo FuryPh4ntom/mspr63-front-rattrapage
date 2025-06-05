@@ -25,14 +25,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   fetchStats() {
-    this.http.get<any>('http://192.168.79.234:3000/api/dashboard/stats').subscribe({
+    this.http.get<any>('http://localhost:3000/api/dashboard/stats').subscribe({
       next: data => this.stats = data,
       error: err => console.error('Erreur fetchStats():', err)
     });
   }
 
   renderSpeciesChart() {
-    this.http.get<any>('http://192.168.79.234:3000/api/dashboard/species-distribution').subscribe({
+    this.http.get<any>('http://localhost:3000/api/dashboard/species-distribution').subscribe({
       next: data => {
         const ctx = document.getElementById('speciesChart') as HTMLCanvasElement;
         if (!ctx) {

@@ -25,7 +25,7 @@ export class InfoespecesComponent implements OnInit {
   }
 
   fetchEspeces(): void {
-    this.http.get<any>(`http://192.168.79.234:3000/api/especes?page=${this.currentPage}`).subscribe(
+    this.http.get<any>(`http://localhost:3000/api/especes?page=${this.currentPage}`).subscribe(
       res => {
         this.especes = res.data;
         this.totalPages = res.totalPages;
@@ -75,7 +75,7 @@ export class InfoespecesComponent implements OnInit {
   }
 
   private sendUpdateRequest(): void {
-    this.http.put(`http://192.168.79.234:3000/api/especes/${this.editId}`, this.editedEspece).subscribe(
+    this.http.put(`http://localhost:3000/api/especes/${this.editId}`, this.editedEspece).subscribe(
       () => {
         this.cancelEdit();
         this.fetchEspeces();
@@ -86,7 +86,7 @@ export class InfoespecesComponent implements OnInit {
 
   deleteEspece(id: string): void {
     if (confirm('Supprimer cette espèce ?')) {
-      this.http.delete(`http://192.168.79.234:3000/api/especes/${id}`).subscribe(
+      this.http.delete(`http://localhost:3000/api/especes/${id}`).subscribe(
         () => this.fetchEspeces(),
         err => console.error(err)
       );
