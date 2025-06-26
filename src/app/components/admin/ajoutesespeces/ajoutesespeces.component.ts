@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -26,7 +26,25 @@ export class AjoutesespecesComponent {
   familles = ['Mammifères', 'Oiseaux', 'Reptiles', 'Amphibiens', 'Poissons', 'Insectes'];
   message = '';
 
-  constructor(private http: HttpClient) {}
+  private apiKey = '';
+
+  constructor(private http: HttpClient) {
+    this.loadApiKey();
+  }
+
+  // Charge la clé API depuis le serveur
+  private loadApiKey(): void {
+    this.http.get<{ apiKey: string }>('http://localhost:3000/api/key/current')
+      .subscribe({
+        next: (res) => {
+          this.apiKey = res.apiKey;
+        },
+        error: (err) => {
+          console.error('Erreur récupération clé API', err);
+          this.message = 'Impossible de récupérer la clé API.';
+        }
+      });
+  }
 
   onImageSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -40,12 +58,33 @@ export class AjoutesespecesComponent {
   }
 
   ajouterEspece(): void {
-    this.http.post('http://localhost:3000/api/especes', this.especeData)
+    if (!this.apiKey) {
+      this.message = 'Clé API manquante, impossible d\'ajouter une espèce.';
+      return;
+    }
+
+    const headers = new HttpHeaders({
+      'x-api-key': this.apiKey
+    });
+
+    this.http.post('http://localhost:3000/api/especes', this.especeData, { headers })
       .subscribe({
-        next: response => {
+        next: () => {
           this.message = 'Espèce ajoutée avec succès !';
+          // Optionnel: réinitialiser le formulaire
+          this.especeData = {
+            espece: '',
+            description: '',
+            nomLatin: '',
+            famille: '',
+            taille: '',
+            region: '',
+            habitat: '',
+            funFact: '',
+            image: ''
+          };
         },
-        error: err => {
+        error: (err) => {
           this.message = 'Erreur lors de l\'ajout.';
           console.error(err);
         }

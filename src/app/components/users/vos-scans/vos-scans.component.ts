@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -21,12 +21,33 @@ export class VosScansComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.loadEspeces();
-    this.fetchScans();
+    this.loadApiKeyAndData();
+  }
+
+  private loadApiKeyAndData(): void {
+    this.http.get<{ apiKey: string }>('http://localhost:3000/api/key/current')
+      .subscribe({
+        next: (res) => {
+          localStorage.setItem('apiKey', res.apiKey);
+          // Après avoir stocké la clé, on charge les données
+          this.loadEspeces();
+          this.fetchScans();
+        },
+        error: (err) => {
+          console.error('Erreur récupération clé API :', err);
+        }
+      });
+  }
+
+  private getApiHeaders(): HttpHeaders {
+    const apiKey = localStorage.getItem('apiKey') || '';
+    return new HttpHeaders({
+      'x-api-key': apiKey
+    });
   }
 
   loadEspeces(): void {
-    this.http.get<any[]>('http://localhost:3000/api/especes/all')
+    this.http.get<any[]>('http://localhost:3000/api/especes/all', { headers: this.getApiHeaders() })
       .subscribe({
         next: data => {
           this.especes = data.map(e => e.espece);
@@ -34,8 +55,6 @@ export class VosScansComponent implements OnInit {
         error: err => console.error('Erreur chargement espèces :', err)
       });
   }
-
-  
 
   fetchScans(): void {
     const email = localStorage.getItem('email');
@@ -46,7 +65,7 @@ export class VosScansComponent implements OnInit {
       url += `&espece=${encodeURIComponent(this.selectedEspece)}`;
     }
 
-    this.http.get<any>(url)
+    this.http.get<any>(url, { headers: this.getApiHeaders() })
       .subscribe({
         next: (res) => {
           this.scans = res.scans;
@@ -72,7 +91,7 @@ export class VosScansComponent implements OnInit {
       url += `&espece=${encodeURIComponent(this.selectedEspece)}`;
     }
 
-    this.http.get<any>(url).subscribe({
+    this.http.get<any>(url, { headers: this.getApiHeaders() }).subscribe({
       next: res => {
         this.scans = res.scans;
       },

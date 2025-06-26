@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -18,14 +18,37 @@ export class InfoespecesComponent implements OnInit {
   editedEspece: any = {};
   editedImageFile: File | null = null;
 
+  private apiKey = '';
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.fetchEspeces();
+    this.loadApiKey();
+  }
+
+  private loadApiKey(): void {
+    this.http.get<{ apiKey: string }>('http://localhost:3000/api/key/current').subscribe({
+      next: (res) => {
+        this.apiKey = res.apiKey;
+        this.fetchEspeces();
+      },
+      error: (err) => {
+        console.error('Erreur récupération clé API', err);
+        // Optionnel : afficher un message d’erreur à l’utilisateur
+      }
+    });
+  }
+
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({ 'x-api-key': this.apiKey });
   }
 
   fetchEspeces(): void {
-    this.http.get<any>(`http://localhost:3000/api/especes?page=${this.currentPage}`).subscribe(
+    if (!this.apiKey) {
+      console.error('Clé API manquante, impossible de récupérer les espèces.');
+      return;
+    }
+    this.http.get<any>(`http://localhost:3000/api/especes?page=${this.currentPage}`, { headers: this.getHeaders() }).subscribe(
       res => {
         this.especes = res.data;
         this.totalPages = res.totalPages;
@@ -62,6 +85,10 @@ export class InfoespecesComponent implements OnInit {
   }
 
   saveEdit(): void {
+    if (!this.apiKey) {
+      console.error('Clé API manquante, impossible de modifier l\'espèce.');
+      return;
+    }
     if (this.editedImageFile) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -75,7 +102,7 @@ export class InfoespecesComponent implements OnInit {
   }
 
   private sendUpdateRequest(): void {
-    this.http.put(`http://localhost:3000/api/especes/${this.editId}`, this.editedEspece).subscribe(
+    this.http.put(`http://localhost:3000/api/especes/${this.editId}`, this.editedEspece, { headers: this.getHeaders() }).subscribe(
       () => {
         this.cancelEdit();
         this.fetchEspeces();
@@ -85,8 +112,12 @@ export class InfoespecesComponent implements OnInit {
   }
 
   deleteEspece(id: string): void {
+    if (!this.apiKey) {
+      console.error('Clé API manquante, impossible de supprimer l\'espèce.');
+      return;
+    }
     if (confirm('Supprimer cette espèce ?')) {
-      this.http.delete(`http://localhost:3000/api/especes/${id}`).subscribe(
+      this.http.delete(`http://localhost:3000/api/especes/${id}`, { headers: this.getHeaders() }).subscribe(
         () => this.fetchEspeces(),
         err => console.error(err)
       );
