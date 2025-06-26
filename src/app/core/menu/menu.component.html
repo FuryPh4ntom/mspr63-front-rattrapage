@@ -1,3 +1,7 @@
+<div *ngIf="dbConnectionFailed" class="error-banner">
+  ⚠️ Connexion à l'API et à la base de données non établie.
+</div>
+
 <div class="navbar">
   <!-- LAMBDA - toujours visibles -->
   <a *ngIf="!isAdmin" routerLink="/home" routerLinkActive="text-blue-400" aria-label="Home">

@@ -55,6 +55,18 @@
   background: #dc2626; /* red-600 */
 }
 
+.error-banner {
+  background-color: #dc2626; /* rouge foncé */
+  color: white;
+  padding: 10px 16px;
+  text-align: center;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+
 /* --------------------------- Tablette ---------------------------- */
 
 @media screen and (min-width: 768px) {
